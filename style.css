@@ -1,0 +1,58 @@
+html,
+body {
+    color: #1F1641;
+    background-color: rgb(146, 196, 27);
+}
+
+.menu-game {
+    margin-top: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    border: 2px solid #000000;
+    width: 30em;
+    height: 30em;
+    box-shadow: 10px 10px 5px #6AB501;
+    border-radius: 1.6em;
+    background: url(tic.jpeg);
+    background-position: bottom;
+    background-repeat: no-repeat;
+}
+
+.btn {
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    padding: 12px;
+    font-size: 20px;
+    transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -o-transition: .2s;
+    display: inline-block;
+    margin: 30px;
+}
+
+.blue {
+    color: #55acee;
+    border: 2px #55acee solid;
+}
+
+.blue:hover {
+    background-color: #55acee;
+    color: #fff;
+}
+
+.red {
+    color: #CC2E30;
+    border: 2px #CC2E30 solid;
+}
+
+.red:hover {
+    background-color: #CC2E30;
+    color: #fff;
+}
+
+footer {
+    margin: 20px;
+}
