@@ -4,8 +4,8 @@ body {
     background-color: rgb(146, 196, 27);
 }
 
-.menu-game {
-    margin-top: 5%;
+.intro {
+    margin-top: 10%;
     margin-left: auto;
     margin-right: auto;
     display: table;
@@ -14,9 +14,25 @@ body {
     height: 30em;
     box-shadow: 10px 10px 5px #6AB501;
     border-radius: 1.6em;
-    background: url(tic.jpeg);
+    background: url("./Images/menu.jpeg");
     background-position: bottom;
     background-repeat: no-repeat;
+}
+
+.mode {
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    border: 2px solid #000000;
+    width: 30em;
+    height: 30em;
+    box-shadow: 10px 10px 5px #6AB501;
+    border-radius: 1.6em;
+    background: url("./Images/menu.jpeg");
+    background-position: bottom;
+    background-repeat: no-repeat;
+    display: none;
 }
 
 .btn {
@@ -29,8 +45,8 @@ body {
     -webkit-transition: .2s;
     -moz-transition: .2s;
     -o-transition: .2s;
-    display: inline-block;
     margin: 30px;
+    display: inline-block;
 }
 
 .blue {
@@ -55,4 +71,61 @@ body {
 
 footer {
     margin: 20px;
+}
+
+
+/* styling the reset button */
+
+.reset {
+    top: 0px;
+    right: 0px;
+    min-height: 0px;
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none !important;
+    text-align: right;
+    padding: 12px;
+    font-size: 20px;
+    transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -o-transition: .2s;
+    display: block;
+}
+
+
+/* sytleing the game board 
+*/
+
+.game-board {
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    display: table;
+    border: 2px solid #000000;
+    width: 30em;
+    height: 30em;
+    box-shadow: 10px 10px 5px #6AB501;
+    display: none;
+}
+
+table {
+    display: table;
+}
+
+.square {
+    width: 140px;
+    height: 140px;
+}
+
+.v {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.h {
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
 }
