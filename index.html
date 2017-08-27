@@ -27,23 +27,58 @@
 
 
 <body>
-    <div id="main_menu" class="menu-game text-center">
-        <div id="intro" class="row">
+    <div id="main_menu" class="text-center">
+        <div id="intro" class="intro row">
             <h3>Welcome to tic tac toe </h3>
+
+            <div id="game_option" class="row">
+                <h4>Please choose game mode </h4>
+                <a id="option1" class="btn blue">Single Player</a>
+                <a id="option2" class="btn red">Two players </a>
+            </div>
         </div>
 
-        <div id="game_option" class="row">
-            <h4>Please choose game mode </h4>
-            <a class="btn blue">Single Player</a>
-            <a class="btn red">Two players </a>
+
+
+
+        <div id="mode" class="mode text-center">
+
+            <a id="reset" value="reset" class="reset">Reset</a>
+
+            <div id="OX">
+                <h4>Please choose X or O </h4>
+                <a id="x" value="1" class="btn blue">X</a>
+                <a id="o" value="0" class="btn red">O </a>
+            </div>
+
         </div>
 
-        </footer>
+        <div id="game_board" class="game-board row">
+            <table>
+                <tr id="row1">
+                    <td class="square"></td>
+                    <td class="square v"></td>
+                    <td class="square"></td>
+                </tr>
+                <tr id="row2">
+                    <td class="square h"></td>
+                    <td class="square v h"></td>
+                    <td class="square h"></td>
+                </tr>
+                <tr id="row3">
+                    <td class="square"></td>
+                    <td class="square v"></td>
+                    <td class="square"></td>
+                </tr>
+            </table>
+        </div>
+
     </div>
-    <footer class="text-center">By <a target="_blank" href="http://users.metropolia.fi/~hail">duonghailee</a>
-        <script src="script.js"></script>
 
-        <div id="single_player" class="single-board"></div>
+    <footer class="text-center">By <a target="_blank" href="http://users.metropolia.fi/~hail">duonghailee</a>
+    </footer>
+    <script src="script.js"></script>
+
 
 </body>
 
