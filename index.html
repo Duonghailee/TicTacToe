@@ -40,37 +40,66 @@
 
 
 
+        <!-- option for one player mode -->
+        <div id="one_player_mode" class="mode text-center">
 
-        <div id="mode" class="mode text-center">
-
-            <a id="reset" value="reset" class="reset">Reset</a>
+            <a id="back" value="back" class="back">Back</a>
 
             <div id="OX">
-                <h4>Please choose X or O </h4>
-                <a id="x" value="1" class="btn blue">X</a>
-                <a id="o" value="0" class="btn red">O </a>
+                <h4>Player, Please choose X or O </h4>
+                <a id="x" value="1" class="btn blue x">X</a>
+                <a id="o" value="0" class="btn red o">O </a>
             </div>
 
         </div>
 
+
+        <!-- option for two player mode -->
+        <div id="two_player_mode" class="mode text-center">
+
+            <a id="back" value="back" class="back">Back</a>
+
+            <div id="OX">
+                <h4>Player 1, Please choose X or O </h4>
+                <a value="1" class="btn blue x">X</a>
+                <a value="-1" class="btn red o">O </a>
+            </div>
+
+        </div>
+
+
+
+
         <div id="game_board" class="game-board row">
+            <div class="row">
+                <div class="col-xs-4">
+                    <h4>Who wins ? </h4>
+                </div>
+                <div class="col-xs-4">
+                    <p id="winner"></p>
+                </div>
+                <div class="col-xs-4">
+                    <a id="reset" value="reset" class="reset">Reset</a>
+                </div>
+            </div>
             <table>
                 <tr id="row1">
-                    <td class="square"></td>
-                    <td class="square v"></td>
-                    <td class="square"></td>
+                    <td><button class="square h"></button></td>
+                    <td><button class="square v h"></button></td>
+                    <td><button class="square h"></button></td>
                 </tr>
                 <tr id="row2">
-                    <td class="square h"></td>
-                    <td class="square v h"></td>
-                    <td class="square h"></td>
+                    <td><button class="square h"></button></td>
+                    <td><button class="square v h"></button></td>
+                    <td><button class="square h"></button></td>
                 </tr>
                 <tr id="row3">
-                    <td class="square"></td>
-                    <td class="square v"></td>
-                    <td class="square"></td>
+                    <td><button class="square h"></button></td>
+                    <td><button class="square v h"></button></td>
+                    <td><button class="square h"></button></td>
                 </tr>
             </table>
+            <p>Thank for playing with us</p>
         </div>
 
     </div>
