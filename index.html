@@ -47,8 +47,8 @@
 
             <div id="OX">
                 <h4>Player, Please choose X or O </h4>
-                <a id="x" value="1" class="btn blue x">X</a>
-                <a id="o" value="0" class="btn red o">O </a>
+                <a value="1" class="btn blue x">X</a>
+                <a value="-1" class="btn red o">O </a>
             </div>
 
         </div>
@@ -73,10 +73,10 @@
         <div id="game_board" class="game-board row">
             <div class="row">
                 <div class="col-xs-4">
-                    <h4>Who wins ? </h4>
+                    <p id="winner">Who wins ? </p>
                 </div>
                 <div class="col-xs-4">
-                    <p id="winner"></p>
+                    <p id="turn"></p>
                 </div>
                 <div class="col-xs-4">
                     <a id="reset" value="reset" class="reset">Reset</a>
@@ -84,19 +84,19 @@
             </div>
             <table>
                 <tr id="row1">
-                    <td><button class="square h"></button></td>
-                    <td><button class="square v h"></button></td>
-                    <td><button class="square h"></button></td>
+                    <td><button id="btn1" value="0" class="square h"></button></td>
+                    <td><button class="square v h" value="0"></button></td>
+                    <td><button class="square h" value="0"></button></td>
                 </tr>
                 <tr id="row2">
-                    <td><button class="square h"></button></td>
-                    <td><button class="square v h"></button></td>
-                    <td><button class="square h"></button></td>
+                    <td><button class="square h" value="0"></button></td>
+                    <td><button class="square v h" value="0"></button></td>
+                    <td><button class="square h" value="0"></button></td>
                 </tr>
                 <tr id="row3">
-                    <td><button class="square h"></button></td>
-                    <td><button class="square v h"></button></td>
-                    <td><button class="square h"></button></td>
+                    <td><button class="square h" value="0"></button></td>
+                    <td><button class="square v h" value="0"></button></td>
+                    <td><button class="square h" value="0"></button></td>
                 </tr>
             </table>
             <p>Thank for playing with us</p>

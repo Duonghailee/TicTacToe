@@ -76,7 +76,7 @@ footer {
 
 /* styling the reset button */
 
-.reset {
+.back {
     top: 0px;
     right: 0px;
     min-height: 0px;
@@ -87,6 +87,25 @@ footer {
     text-decoration: none !important;
     text-align: right;
     padding: 12px;
+    font-size: 20px;
+    transition: .2s;
+    -webkit-transition: .2s;
+    -moz-transition: .2s;
+    -o-transition: .2s;
+    display: block;
+}
+
+.reset {
+    top: 0px;
+    right: 0px;
+    min-height: 0px;
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none !important;
+    text-align: right;
+    padding: 6px;
     font-size: 20px;
     transition: .2s;
     -webkit-transition: .2s;
@@ -117,15 +136,21 @@ table {
 
 .square {
     width: 140px;
-    height: 140px;
+    height: 110px;
 }
 
 .v {
-    border-left: 1px solid #000;
-    border-right: 1px solid #000;
+    border-left: 2px solid #000;
+    border-right: 2px solid #000;
 }
 
 .h {
     border-top: 1px solid #000;
     border-bottom: 1px solid #000;
+}
+
+#winner,
+#turn {
+    font-size: 20px !important;
+    text-align: center !important;
 }

@@ -1,7 +1,16 @@
 // switch between main screen and one player screen or two-player screen
 var newGame;
-var p1;
-var x = "<img src='Images/x.png' width='130' height='100' >";
+var p1 = 1, // player 1 
+    p2 = -1; // player 2
+var x = "<img src='./Images/X.png' width='130' height='100' >",
+    o = "<img src='./Images/O.jpg' width='130' height='100' >",
+    isP1 = true,
+    isP2 = !isP1;
+
+var isX = 1,
+    isY = -1;
+var Arr = Array(3).fill(0).map(() => Array(3).fill("0"));
+var winner = document.getElementById("winner");
 
 //single player 
 $('#option1').click(function() {
@@ -17,6 +26,7 @@ $('#option2').click(function() {
 });
 
 
+//when back and reset are click, reset all things
 $('#back, #reset').click(function() {
     $('#intro').show();
     $('.mode').hide();
@@ -27,12 +37,12 @@ $('#back, #reset').click(function() {
 
 
 
-
 // x or o iss chosen
 $('.x, .o').click(function() {
-    p1 = $(this).attr('value'); //1 if choose x, -1 if choose o
-    p2 = -p1;
+    isX = $(this).attr('value'); //true if choose x, false if choose o
+    $('#turn').html("Player 1 's turn");
     startGame();
+
 });
 
 
@@ -42,71 +52,105 @@ function startGame() {
     $('.mode').hide();
     // print board
     $('#game_board').show();
+    //default p1 play first
+    isP1 = true;
 }
 
 
 $('.square').click(function() {
+    $(this).attr('disabled', true); //lock further click
+    if (isP1) {
+        $('#turn').html("Player 2 's turn");
+        $(this).attr('value', 1);
+        // if player 1 is currently play the game
+        if (isX == 1) { // choose X
+            isY = -1;
+            $(this).html(x); //print X on boardgame
 
-    $(this).html(x);
+        } else {
+            $(this).html(o);
+            isY = 1;
+        }
+        isP1 = false;
+    } else { //player 2 's turn
+
+        $('#turn').html("Player 1 's turn");
+        $(this).attr('value', -1);
+
+        if (isY == 1) {
+            $(this).html(x);
+            isX = -1;
+        } else {
+            $(this).html(o);
+            isX = 1;
+        }
+        isP1 = true;
+    }
+    var win = checkWinner(p1);
+    if (win === 1) {
+        winner.innerHTML = "Player 1 win";
+        return;
+    } else if (win === -1) {
+        winner.innerHTML = "Player 2 win";
+        return;
+    } else if (win === 0) {
+        winner.innerHTML = "Game tie";
+    }
 
 
-})
+});
 
 
 function clearGameBoard() {
     $('.square').each(function() {
+        $(this).attr('disabled', false); //unlock further click
         $(this).text("");
     })
 }
 
-/* object oriented array of tic tac toe for 2 players
-var TicTacToe = new function() {
-    this.X = 1;
-    this.O = -1;
-    this.EMPTY = 0;
-    this.board = arr2D();
-    this.player = this.X; //current player
 
-    function arr2D() {
-        return new Array(3).fill(new Array(3).fill(0));
-    }
+function checkWinner(p1) {
+    p1 = 1;
 
-    this.clearBoard = clearBoard();
-
-    function clearBoard() {
-        for (var i = 0; i < 3; i++) {
-            for (var j = 0; j < 3; j++) {
-                this.board[i][j] = this.EMPTY;
-            }
+    // console.log(Arr); test Arr
+    var nth = 0;
+    //adding button value into array element 
+    for (var i = 0; i < Arr.length; i++) {
+        var entry = Arr[i];
+        for (var j = 0; j < entry.length; j++) {
+            var mark = $('.square').eq(nth).attr('value');
+            entry[j] = parseInt(mark);
+            nth++;
+            //console.log("entry " + j + "-button: " + nth + "-attr: " + mark); test button in order
         }
     }
 
-    this.putMark = put(i, j);
+    // console.log(Arr[0][0] + Arr[0][1] + Arr[0][2]); test check row,..
 
-    function put(i, j) {
-        this.board[i, j] = player;
-        player = -player;
+    //check if P1 is winner
+    if ((Arr[0][0] + Arr[0][1] + Arr[0][2] == p1 * 3) ||
+        (Arr[1][0] + Arr[1][1] + Arr[1][2] == p1 * 3) ||
+        (Arr[2][0] + Arr[2][1] + Arr[2][2] == p1 * 3) ||
+        (Arr[0][0] + Arr[1][0] + Arr[2][0] == p1 * 3) ||
+        (Arr[0][1] + Arr[1][1] + Arr[2][1] == p1 * 3) ||
+        (Arr[0][2] + Arr[1][2] + Arr[2][2] == p1 * 3) ||
+        (Arr[0][0] + Arr[1][1] + Arr[2][2] == p1 * 3) ||
+        (Arr[2][0] + Arr[1][1] + Arr[0][2] == p1 * 3)) {
+        return 1;
+
+    } else if (
+        (Arr[0][0] + Arr[0][1] + Arr[0][2] == -p1 * 3) ||
+        (Arr[1][0] + Arr[1][1] + Arr[1][2] == -p1 * 3) ||
+        (Arr[2][0] + Arr[2][1] + Arr[2][2] == -p1 * 3) ||
+        (Arr[0][0] + Arr[1][0] + Arr[2][0] == -p1 * 3) ||
+        (Arr[0][1] + Arr[1][1] + Arr[2][1] == -p1 * 3) ||
+        (Arr[0][2] + Arr[1][2] + Arr[2][2] == -p1 * 3) ||
+        (Arr[0][0] + Arr[1][1] + Arr[2][2] == -p1 * 3) ||
+        (Arr[2][0] + Arr[1][1] + Arr[0][2] == -p1 * 3)
+    ) {
+        return -1;
+    } else {
+        return 0;
     }
 
-    //function check whether the board config is win for the given player
-    this.isWin = function(mark) {
-        return (this.board[0][0] + this.board[0][1] + this.board[0][2] == mark * 3) ||
-            (this.board[1][0] + this.board[1][1] + this.board[1][2] == mark * 3) ||
-            (this.board[2][0] + this.board[2][1] + this.board[2][2] == mark * 3) ||
-            (this.board[0][0] + this.board[1][0] + this.board[2][0] == mark * 3) ||
-            (this.board[0][1] + this.board[1][1] + this.board[2][1] == mark * 3) ||
-            (this.board[0][2] + this.board[1][2] + this.board[2][2] == mark * 3) ||
-            (this.board[0][0] + this.board[1][1] + this.board[2][2] == mark * 3) ||
-            (this.board[2][0] + this.board[1][1] + this.board[0][2] == mark * 3);
-    }
-
-    this.winner = function() {
-        if (this.isWin(this.X)) {
-            return this.X;
-        } else if (this.isWin(this.O)) {
-            return this.O;
-        } else {
-            return 0; //tie;
-        }
-    }
-} */
+}
