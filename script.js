@@ -89,9 +89,12 @@ $('.square').click(function() {
     var win = checkWinner(p1);
     if (win === 1) {
         winner.innerHTML = "Player 1 win";
+        lockClick();
+
         return;
     } else if (win === -1) {
         winner.innerHTML = "Player 2 win";
+        lockClick();
         return;
     } else if (win === 0) {
         winner.innerHTML = "Game tie";
@@ -102,10 +105,18 @@ $('.square').click(function() {
 
 
 function clearGameBoard() {
+    winner.innerHTML = "Game tie";
     $('.square').each(function() {
         $(this).attr('disabled', false); //unlock further click
         $(this).text("");
+        $(this).attr('value', '0');
     })
+}
+
+function lockClick() {
+    $('.square').each(function() {
+        $(this).attr('disabled', true); //unlock further click
+    });
 }
 
 
@@ -136,6 +147,7 @@ function checkWinner(p1) {
         (Arr[0][2] + Arr[1][2] + Arr[2][2] == p1 * 3) ||
         (Arr[0][0] + Arr[1][1] + Arr[2][2] == p1 * 3) ||
         (Arr[2][0] + Arr[1][1] + Arr[0][2] == p1 * 3)) {
+
         return 1;
 
     } else if (
