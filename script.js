@@ -26,7 +26,9 @@ var isX = 1,
 Create new 9-size block array and fill 9 elements with 0s, it is the back-end of game board of 9 blocks*/
 var Arr = Array(3).fill(0).map(() => Array(3).fill("0"));
 
-
+/* 
+Block that sill available to click */
+var blockRemain = 9;
 
 /*
 Where to inform winning player */
@@ -74,6 +76,7 @@ $('#back, #reset').click(function() {
     mode2 = false;
     isP1 = true;
     isP2 = false;
+    blockRemain = 9;
 });
 
 
@@ -85,6 +88,7 @@ function startGame() {
     $('#game_board').show();
     //default p1 play first
     isP1 = true;
+
 }
 
 /* clicking start here
@@ -144,10 +148,10 @@ $('button').click(function play() {
         var id = parseInt($(this).attr('id').substring(3));
         console.log(id); //test the position player 1 clicked
         if (isP1) { //If player 1 is currently playing
-
             $('#turn').html("Computer's turn"); // inform next turn is player 2
             window.setTimeout(10);
             $(this).attr('value', 1); // add value 1 to the button
+            blockRemain--;
             if (isX == 1) { // if player 1 chooses X
                 isY = -1; //computer has to choose Y
                 $(this).html(x); //print X on boardgame for player 1
@@ -164,10 +168,11 @@ $('button').click(function play() {
         var pos = 1; //assign default for computer to start from block 1
 
         //If the next pos is similar to block that player 1 has played, then randomly generate another number
-        while ($('#btn' + pos).prop('disabled') == true) {
+        while ($('#btn' + pos).prop('disabled') == true && blockRemain > 0) {
             pos = Math.floor(Math.random() * 9) + 1;
             console.log("after random: " + pos);
         }
+
 
         var putPos = '#btn' + pos;
         console.log(putPos); //test the next put mark
@@ -176,6 +181,7 @@ $('button').click(function play() {
         //computer making random move
         $('#turn').html("Player 1 's turn"); // inform next turn is player 1
         $(putPos).attr('value', -1); // add value -1 to the button
+        blockRemain--;
         $(putPos).prop('disabled', true); //lock further click
         if (isY == 1) { // if computer has to choose X because player 1 chosed O
             $(putPos).html(x); //print X
