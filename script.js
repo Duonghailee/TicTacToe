@@ -167,10 +167,12 @@ $('button').click(function play() {
         //now Computer turn
         var pos = 1; //assign default for computer to start from block 1
 
+        console.log("ramining block: " + blockRemain);
         //If the next pos is similar to block that player 1 has played, then randomly generate another number
         while ($('#btn' + pos).prop('disabled') == true && blockRemain > 0) {
             pos = Math.floor(Math.random() * 9) + 1;
             console.log("after random: " + pos);
+
         }
 
 
