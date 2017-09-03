@@ -10,7 +10,7 @@ Built in HTML, CSS, JS and jQuery
 # Features
 Current functionalities: 
 
-- A stupid AI implemented using Math.random Library.
+- A stupid AI implemented using Math.random Object.
 - First player can always choose to play as X or O.
 - Recurssive mode
 - Reset button to load game again, clear 100% data
