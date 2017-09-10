@@ -1,3 +1,5 @@
+"use strict"
+
 /* there 2 two option modes, 1 player against computure and 2 players
  */
 var mode1 = false,
@@ -185,7 +187,7 @@ $('button').click(function play() {
             console.log("after random: " + pos);
 
         }*/
-        board[pos] = "C";
+
 
         var putPos = '#btn' + pos;
         console.log("next button of ai: " + putPos); //test the next put mark
@@ -206,7 +208,7 @@ $('button').click(function play() {
             $(putPos).html(o);
             isX = 1; //player 1 choosed X
         }
-        //  isP1 = true; //player 1's turn
+        board[pos] = "C";
 
         /*
         always checking whether the game has stop due to tie, or winner is found.*/
