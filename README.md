@@ -10,11 +10,10 @@ Built in HTML, CSS, JS and jQuery
 # Features
 Current functionalities: 
 
-- A stupid AI implemented using Math.random Object.
+- Minimax alogirthm AI implementation make game harder to win.
 - First player can always choose to play as X or O.
 - Recurssive mode
 - Reset button to load game again, clear 100% data
 
 Future wishes:
-- Improved AI version which make the game harder to win
 - styling the game for more attractive
