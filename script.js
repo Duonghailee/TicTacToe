@@ -25,12 +25,18 @@ var isX = 1,
 /*
 Create new 9-size block array and fill 9 elements with 0s, it is the back-end of game board of 9 blocks*/
 var Arr = Array(3).fill(0).map(() => Array(3).fill("0"));
+//var flattened = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+// Array that stores P1 moves so that AI keeps track of player move
 
 
+/* 
+Block that sill available to click */
+var blockRemain = 9;
 
 /*
 Where to inform winning player */
 var winner = document.getElementById("winner");
+
 
 
 // X or O is chosen
@@ -74,6 +80,8 @@ $('#back, #reset').click(function() {
     mode2 = false;
     isP1 = true;
     isP2 = false;
+    blockRemain = 9;
+
 });
 
 
@@ -85,16 +93,17 @@ function startGame() {
     $('#game_board').show();
     //default p1 play first
     isP1 = true;
+
 }
 
 /* clicking start here
  */
 
-/* 2 players mode */
 
+/* game start with button click */
 
 $('button').click(function play() {
-    if (mode2) {
+    if (mode2) { //2 players mode
         $(this).prop('disabled', true); //lock further click, once one block is chosen, no any changeable
         if (isP1) { //If player 1 is currently playing
             $('#turn').html("Player 2 's turn"); // inform next turn is player 2
@@ -126,6 +135,7 @@ $('button').click(function play() {
 
         /*
         always checking whether the game has stop due to tie, or winner is found.*/
+        updateArr();
         var win = checkWinner(p1);
         if (win === 1) {
             winner.innerHTML = "Player 1 win";
@@ -139,43 +149,55 @@ $('button').click(function play() {
         } else if (win === 0) {
             winner.innerHTML = "Game tie";
         }
-    } else { //mode 1
+    } else { //mode 1, player against computer
+        // updateArr();
         $(this).prop('disabled', true); //lock further click, once one block is chosen, no any changeable
         var id = parseInt($(this).attr('id').substring(3));
-        console.log(id); //test the position player 1 clicked
-        if (isP1) { //If player 1 is currently playing
+        // console.log("id of player: " + id); //test the position player 1 clicked
 
-            $('#turn').html("Computer's turn"); // inform next turn is player 2
-            window.setTimeout(10);
-            $(this).attr('value', 1); // add value 1 to the button
-            if (isX == 1) { // if player 1 chooses X
-                isY = -1; //computer has to choose Y
-                $(this).html(x); //print X on boardgame for player 1
+        board[id] = "P";
+        //Player always plays firstly for polite
 
-            } else {
-                $(this).html(o); // else print O
-                isY = 1; //computer print X in contrast
-            }
-            // isP1 = false; // Player 1 finished its turn
+        $('#turn').html("Computer's turn"); // inform next turn is player 2
+
+        $(this).attr('value', 1); // add value 1 to the button
+        blockRemain--;
+        if (isX == 1) { // if player 1 chooses X
+            isY = -1; //computer has to choose Y
+            $(this).html(x); //print X on boardgame for player 1
+
+        } else {
+            $(this).html(o); // else print O
+            isY = 1; //computer print X in contrast
         }
+        // isP1 = false; // Player 1 finished its turn
 
 
         //now Computer turn
-        var pos = 1; //assign default for computer to start from block 1
+        //assign default for computer to start from block 1
+        var pos = getPos();
+        //  console.log("postion: " + pos);
 
+        // console.log("ramining block: " + blockRemain);
         //If the next pos is similar to block that player 1 has played, then randomly generate another number
-        while ($('#btn' + pos).prop('disabled') == true) {
+        /*while ($('#btn' + pos).prop('disabled') == true && blockRemain > 0) {
             pos = Math.floor(Math.random() * 9) + 1;
             console.log("after random: " + pos);
-        }
+
+        }*/
+        board[pos] = "C";
 
         var putPos = '#btn' + pos;
-        console.log(putPos); //test the next put mark
+        console.log("next button of ai: " + putPos); //test the next put mark
 
 
         //computer making random move
-        $('#turn').html("Player 1 's turn"); // inform next turn is player 1
+        setTimeout(function() {
+            $('#turn').html("Player 1 's turn"); // inform next turn is player 1
+        }, 500);
+
         $(putPos).attr('value', -1); // add value -1 to the button
+        blockRemain--;
         $(putPos).prop('disabled', true); //lock further click
         if (isY == 1) { // if computer has to choose X because player 1 chosed O
             $(putPos).html(x); //print X
@@ -188,6 +210,7 @@ $('button').click(function play() {
 
         /*
         always checking whether the game has stop due to tie, or winner is found.*/
+        updateArr();
         var win = checkWinner(p1);
         if (win === 1) {
             winner.innerHTML = "Player 1 win";
@@ -218,6 +241,7 @@ function clearGameBoard() {
         $(this).text(""); // clear X/O symbol
         $(this).attr('value', '0'); //Reset the value of each block to 0
     })
+    board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 }
 
 /* func lock the button from click event 
@@ -228,11 +252,11 @@ function lockClick() {
     });
 }
 
-/*
-functon to check winner */
-function checkWinner(p1) {
-    p1 = 1; //Player 1 always is 1
 
+/* 
+update array */
+
+function updateArr() {
     // console.log(Arr); test Arr
     var nth = 0;
     //adding button value into each array element 
@@ -245,6 +269,12 @@ function checkWinner(p1) {
             //console.log("entry " + j + "-button: " + nth + "-attr: " + mark); test button in order
         }
     }
+}
+
+/*
+functon to check winner */
+function checkWinner(p1) {
+
 
     // console.log(Arr[0][0] + Arr[0][1] + Arr[0][2]); test check row,..
 
@@ -275,4 +305,100 @@ function checkWinner(p1) {
         return 0; //or tie game
     }
 
+}
+
+
+
+
+var board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+
+var aiPlayer = "C";
+var huPlayer = "P";
+
+
+function getPos() {
+    return minimax(board, aiPlayer).index;
+}
+
+function minimax(reboard, player) {
+
+    let array = emptySpot(reboard);
+    //console.log(array);
+    if (winning(reboard, huPlayer)) {
+        return {
+            score: -10
+        };
+    } else if (winning(reboard, aiPlayer)) {
+        return {
+            score: 10
+        };
+    } else if (array.length === 0) {
+        return {
+            score: 0
+        };
+    }
+
+    var moves = [];
+    for (var i = 0; i < array.length; i++) {
+        var move = {};
+        move.index = reboard[array[i]];
+        reboard[array[i]] = player;
+        // console.log(move);
+
+        if (player == aiPlayer) {
+            var g = minimax(reboard, huPlayer);
+            move.score = g.score;
+        } else {
+            var g = minimax(reboard, aiPlayer);
+            move.score = g.score;
+        }
+        reboard[array[i]] = move.index;
+        moves.push(move);
+    }
+
+    var bestMove;
+    if (player === aiPlayer) {
+        var bestScore = -10000;
+        for (var i = 0; i < moves.length; i++) {
+            if (moves[i].score > bestScore) {
+                bestScore = moves[i].score;
+                bestMove = i;
+            }
+        }
+    } else {
+        var bestScore = 10000;
+        for (var i = 0; i < moves.length; i++) {
+            if (moves[i].score < bestScore) {
+                bestScore = moves[i].score;
+                bestMove = i;
+            }
+        }
+    }
+    return moves[bestMove];
+
+}
+
+function emptySpot(reboard) {
+    //flattern Arr
+    return reboard.filter(function(e) {
+        return e != "P" && e != "C";
+    });
+
+}
+
+function winning(board, player) {
+    if (
+        (board[0] == player && board[1] == player && board[2] == player) ||
+        (board[3] == player && board[4] == player && board[5] == player) ||
+        (board[6] == player && board[7] == player && board[8] == player) ||
+        (board[0] == player && board[3] == player && board[6] == player) ||
+        (board[1] == player && board[4] == player && board[7] == player) ||
+        (board[2] == player && board[5] == player && board[8] == player) ||
+        (board[0] == player && board[4] == player && board[8] == player) ||
+        (board[2] == player && board[4] == player && board[6] == player)
+    ) {
+        return true;
+    } else {
+        return false;
+    }
 }
