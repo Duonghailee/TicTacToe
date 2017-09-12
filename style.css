@@ -154,3 +154,22 @@ table {
     font-size: 20px !important;
     text-align: center !important;
 }
+
+@media screen and (max-width: 600px) {
+    #main_menu {
+        top: 35px;
+        -moz-transform: scale(0.6);
+        -ms-transform: scale(0.6);
+        -o-transform: scale(0.6);
+        -webkit-transform: scale(0.6);
+        transform: scale(0.6);
+        -o-transform-origin: 0 0;
+        -ms-transform-origin: 0 0;
+        -webkit-transform-origin: 0 0;
+        -moz-transform-origin: 0 0;
+        transform-origin: 0 0;
+        left: 50%;
+        margin-left: 35px;
+        margin-top: 80px;
+    }
+}
